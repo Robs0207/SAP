@@ -1,0 +1,129 @@
+@Metadata.layer: #CORE
+
+@UI: {
+    headerInfo: {
+        typeName: 'Travel',
+        typeNamePlural: 'Travels',
+                title: {
+                type: #STANDARD, value: 'Description'
+        },
+        description: {
+            value: 'TravelID'
+        }
+    },
+    presentationVariant: [{
+        sortOrder: [{
+            by: 'LocalLastChangedAt',
+            direction: #DESC
+        }],
+        visualizations: [{
+            type: #AS_LINEITEM
+        }]
+    }]
+}
+
+annotate view ZC_FE_Travel_001587 with
+
+{
+  @UI.facet: [
+    {
+        id: 'TravelHeaderPrice',
+        purpose: #HEADER,
+        label: 'Text',
+        type: #DATAPOINT_REFERENCE,
+        position: 10,
+        targetQualifier: 'PriceData'
+    },
+    {
+        id: 'TravelHeaderOverallStatus',
+        purpose: #HEADER,
+        type: #DATAPOINT_REFERENCE,
+        position: 20,
+        targetQualifier: 'StatusData'
+     },
+         {
+           label: 'General Information',
+           id: 'GeneralInfo',
+           type: #COLLECTION,
+           position: 10
+    },
+    {
+      label: 'General',
+      id: 'Travel',
+      type: #IDENTIFICATION_REFERENCE,
+      purpose: #STANDARD,
+      parentId: 'GeneralInfo',
+      position: 10
+    },
+    
+        {
+      id: 'Dates',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Dates',
+      position: 30,
+      targetQualifier: 'DatesGroup'
+    },
+    {
+      id: 'Prices',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Prices',
+      position: 20,
+      targetQualifier: 'PricesGroup'
+    },
+        {
+      id: 'Booking',
+      purpose: #STANDARD,
+      type: #LINEITEM_REFERENCE,
+      label: 'Bookings',
+      position: 20,
+      targetElement: '_Booking'
+    }
+  ]
+
+  @UI.lineItem: [{ position: 10  }]
+  TravelID;
+
+  @UI.identification: [{ position: 10 }]
+  Description;
+  
+  @UI.lineItem: [{ position: 20 }]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.identification: [{ position: 30 }]
+  AgencyID;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.selectionField: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  CustomerID;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [{ qualifier: 'DatesGroup', position: 10 }]
+  BeginDate;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.fieldGroup: [{ qualifier: 'DatesGroup', position: 20 }]
+  EndDate;
+
+  @UI.lineItem: [{ position: 60 }]
+  @UI.fieldGroup: [ { qualifier: 'PricesGroup', position: 10} ]
+  BookingFee;
+
+  @UI.lineItem: [{ position: 70 }]
+  @UI.fieldGroup: [ { qualifier: 'PricesGroup', position: 20} ]
+  @UI.dataPoint: { qualifier: 'PriceData', title: 'Total Price'}
+  TotalPrice;
+
+  @UI.lineItem: [{ position: 80, criticality: 'OverallStatusCriticality' }]
+  @UI.selectionField: [{ position: 30 }]
+  @UI.textArrangement: #TEXT_ONLY
+  @UI.dataPoint: { qualifier: 'StatusData', title: 'Status', criticality: 'OverallStatusCriticality' }
+  OverallStatus;
+
+  @UI.lineItem: [{ position: 90 }]
+  LocalLastChangedAt;
+
+}

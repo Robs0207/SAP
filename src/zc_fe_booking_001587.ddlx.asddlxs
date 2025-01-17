@@ -1,0 +1,32 @@
+@Metadata.layer: #CORE
+
+annotate view ZC_FE_Booking_001587
+  with
+{
+  @UI.lineItem: [ { position: 05, label: ' ', value: '_Carrier.AirlinePicURL' } ]
+  _Carrier;
+  
+  @UI.lineItem: [ { position: 10 } ]
+  BookingID;
+
+  @UI.lineItem: [ { position: 20 } ]
+  BookingDate;
+
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.textArrangement: #TEXT_ONLY
+  CustomerID;
+
+  @UI.lineItem: [ { position: 40 } ]
+  @UI.textArrangement: #TEXT_ONLY
+  CarrierID;
+
+  @UI.lineItem: [ { position: 50 } ]
+  ConnectionID;
+
+  @UI.lineItem: [ { position: 60 } ]
+  FlightDate;
+
+  @UI.lineItem: [ { position: 70 } ]
+  FlightPrice;
+
+}
